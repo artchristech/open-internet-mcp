@@ -486,6 +486,13 @@ const ipfsCat: ToolDef = {
     path: z.string().max(500).regex(/^([A-Za-z0-9_.\-/]*)$/).optional(),
   }),
   call: async ({ cid, path }) => {
+    if (path) {
+      // Block path traversal: reject any '..' segment.
+      const segs = (path as string).split("/").filter((s: string) => s.length > 0);
+      if (segs.some((s: string) => s === ".." || s === ".")) {
+        throw new SafeFetchError("bad_input", "IPFS path may not contain '.' or '..' segments");
+      }
+    }
     const suffix = path ? `/${path.replace(/^\//, "")}` : "";
     const url = `https://ipfs.io/ipfs/${cid}${suffix}`;
     const r = await safeFetch(url, {
