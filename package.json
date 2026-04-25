@@ -1,0 +1,46 @@
+{
+  "name": "open-internet-mcp",
+  "version": "0.1.0",
+  "description": "An MCP server that bundles 25 of the highest-leverage keyless public APIs of the open internet.",
+  "type": "module",
+  "bin": {
+    "open-internet-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x dist/index.js",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "smoke": "node scripts/smoke.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "agents",
+    "open-data",
+    "wikidata",
+    "openstreetmap",
+    "edgar",
+    "openalex",
+    "ethereum"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.23.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "typescript": "^5.5.4"
+  }
+}
