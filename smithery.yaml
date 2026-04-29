@@ -1,0 +1,20 @@
+# Smithery deployment manifest.
+# Docs: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  configSchema:
+    # No runtime configuration needed — every tool uses keyless public APIs.
+    type: object
+    properties: {}
+    additionalProperties: false
+  commandFunction: |-
+    (config) => ({
+      command: "node",
+      args: ["dist/index.js"],
+      env: {}
+    })
+
+build:
+  dockerfile: Dockerfile
+  dockerBuildPath: .
